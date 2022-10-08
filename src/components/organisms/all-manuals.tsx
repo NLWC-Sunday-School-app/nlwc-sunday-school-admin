@@ -1,15 +1,20 @@
-import { useState } from "react";
 import ContentWrapper from "../molecules/content-wrapper";
 import ManualItem from "../molecules/manual-item";
-import Manual from "../../assets/manual.png";
 import Pagination from "../molecules/pagination";
 import useAllManuals from "../../hooks/get-all-manuals";
 
 interface IAllManualsProps {}
 
 const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
-  const { manuals, loading, totalManual } = useAllManuals();
-  const [pageNumber, setPageNumber] = useState(1);
+  const {
+    manuals,
+    loading,
+    totalManual,
+    setSortBy,
+    pageNumber,
+    lastPage,
+    setPageNumber,
+  } = useAllManuals();
   return (
     <div className="manuals">
       <div className="dashboard_home-head">
@@ -17,13 +22,21 @@ const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
       </div>
       <ContentWrapper className="manual_wrapper">
         <>
-          <div className=" manual_head">
-            <p>002 Manuals Added</p>
+          <div className="manual_head">
+            <p>{loading ? "0" : totalManual} Manuals Added</p>
             <ContentWrapper className="manual_head-select">
-              <select name="sort by" title="sort by" id="">
-                <option value="latest">Sort By</option>
-                <option value="latest">New Manuals First</option>
-                <option value="latest">New Manuals First</option>
+              <select
+                name="sort by"
+                title="sort by"
+                id=""
+                onChange={(e) => {
+                  setSortBy(e.target.value as "newest" | "oldest");
+                }}
+              >
+                <option value="newest" selected>
+                  Sort By: Newest
+                </option>
+                <option value="oldest">Sort By: Oldest</option>
               </select>
             </ContentWrapper>
           </div>
@@ -41,7 +54,13 @@ const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
               ))}
             </div>
           )}
-          {totalManual > 10 ? <Pagination /> : ""}
+          <Pagination
+            pageNumber={pageNumber}
+            setPageNumber={setPageNumber}
+            totalManual={totalManual}
+            currentNumber={manuals.length}
+            lastPage={lastPage}
+          />
         </>
       </ContentWrapper>
     </div>

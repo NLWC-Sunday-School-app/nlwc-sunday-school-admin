@@ -9,6 +9,7 @@ interface IFormInputProps extends React.HTMLProps<HTMLInputElement> {
 const FormInput: React.FunctionComponent<IFormInputProps> = ({
   label,
   onChange,
+  ...props
 }) => {
   return (
     <div className="form_input">
@@ -19,6 +20,7 @@ const FormInput: React.FunctionComponent<IFormInputProps> = ({
         id={label}
         title={label}
         onChange={onChange}
+        {...props}
       />
     </div>
   );

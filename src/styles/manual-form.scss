@@ -24,7 +24,7 @@
     }
   }
   &_btn {
-    @apply bg-red200 text-white px-3 py-2 mt-5 rounded block ml-auto;
+    @apply bg-red200 hover:bg-red text-white w-full mt-5 rounded block ml-auto h-14;
   }
 }
 

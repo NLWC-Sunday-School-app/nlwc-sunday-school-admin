@@ -1,13 +1,12 @@
 import request from ".";
+import { IManualData } from "../types/types";
 
 export const getManuals = () => request.get("/manuals");
 
-export const postManuals = (manual: {
-  theme: string;
-  topic: string;
-  text: string;
-  lesson: string;
-  header_image: string;
-  body: string;
-  summary: string;
-}) => request.post("/manuals", manual);
+export const getAllManuals = (
+  sortBy: "oldest" | "newest",
+  pageNumber: number
+) => request.get(`/manuals?sortBy=${sortBy}&page=${pageNumber}`);
+
+export const uploadManual = (manual: IManualData) =>
+  request.post("/manuals", manual);

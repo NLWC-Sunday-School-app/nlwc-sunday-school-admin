@@ -7,7 +7,7 @@
     @apply w-24;
   }
   &_btn {
-    @apply bg-red200 flex gap-3 items-center justify-center text-white w-[125px] h-9 rounded-md mt-7;
+    @apply bg-red200 hover:bg-red flex gap-3 items-center justify-center text-white w-[125px] h-9 rounded-md mt-7;
   }
   &_links {
     @apply mt-28;
@@ -48,7 +48,7 @@
     @apply mb-4 text-5xl font-bold text-red200;
   }
   &-btn {
-    @apply mb-4 w-[8.375rem] h-11 bg-red rounded border border-red200 text-white;
+    @apply mb-4 w-[8.375rem] h-11 bg-red hover:bg-red200 rounded border border-red200 text-white;
     @apply flex items-center justify-center gap-3;
   }
 }
@@ -60,7 +60,7 @@
       @apply text-gray200;
     }
     a {
-      @apply text-red200 underline;
+      @apply text-red200 hover:text-red underline;
     }
   }
   &-note {

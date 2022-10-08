@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ContentWrapper from "../molecules/content-wrapper";
-import Manual from "../../assets/manual.png";
 import ManualItem from "../molecules/manual-item";
 import UpcomingReleases from "./upcoming-releases";
 import { Link } from "react-router-dom";
@@ -25,7 +24,9 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
         <div>
           <p className="manual_count-text">Total number of manuals added</p>
           <div className="dashboard_home-head">
-            <p className="manual_count-number">{totalManual}</p>
+            <p className="manual_count-number">
+              {loading ? "..." : totalManual}
+            </p>
             <Link to="/new" className="manual_count-btn" type="button">
               <svg
                 width="14"
@@ -119,7 +120,7 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
                 ? manuals1.map((manual, index) => (
                     <ManualItem
                       key={manual.topic}
-                      imgUrl={Manual}
+                      imgUrl={manual.header_image}
                       title={manual.topic}
                       date={manual.manual_date}
                     />

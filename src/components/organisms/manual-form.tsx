@@ -5,26 +5,15 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import { useState } from "react";
+import { uploadManual } from "../../services/manual";
+import { IManualData } from "../../types/types";
 
 interface IManualFormProps {}
 
-interface ManualData {
-  theme: string;
-  topic: string;
-  text: string;
-  lesson: string;
-  header_image: string;
-  body: string;
-  summary: string;
-}
+
 const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
-  const Font = ReactQuill.Quill.import("formats/font"); // <<<< ReactQuill exports it
-  Font.whitelist = ["Apercu", "roboto"]; // allow ONLY these fonts and the default
-  ReactQuill.Quill.register(Font, true);
-  const [value, setValue] = useState("");
   const modules = {
     toolbar: [
-      [{ font: ["Apercu"] }],
       [{ header: [1, 2, false] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
       [
@@ -34,31 +23,17 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
         { indent: "+1" },
       ],
       ["link", "image"],
-      //   ["clean"],
     ],
   };
 
-  const formats = [
-    "fonts",
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
-  const [manualData, setManualData] = useState<ManualData>({
+  const [manualData, setManualData] = useState<IManualData>({
     theme: "",
     topic: "",
     text: "",
     lesson: "",
-    header_image: "",
+    header_image: "test",
     body: "",
+    manual_date: "",
     summary: "",
   });
   return (
@@ -71,6 +46,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
           <p className="form_note">Please fill every input field required</p>
           <FormInput
             label="Theme of study"
+            placeholder="Type the theme of the study not topic here"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, theme: target.value });
@@ -78,6 +54,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
           />
           <FormInput
             label="Lesson Number"
+            placeholder="Type the lesson number in numbers. e.g. 4, 5, 23, etc"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, lesson: target.value });
@@ -85,13 +62,22 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
           />
           <FormInput
             label="Topic"
+            placeholder="Type the topic of the lesson here"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, topic: target.value });
             }}
           />
           <FormInput
+            label="Manual Date"
+            onChange={(e) => {
+              const target = e.target as HTMLInputElement;
+              setManualData({ ...manualData, manual_date: target.value });
+            }}
+          />
+          <FormInput
             label="Bible Text"
+            placeholder="Click the add bible text to include more than one bible text"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, text: target.value });
@@ -109,13 +95,10 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             theme="snow"
             // value={}
             onChange={(e) => {
-              // const target = e.target as HTMLInputElement;
-              console.log("html body:", e);
-
               setManualData({ ...manualData, body: e });
             }}
             modules={modules}
-            formats={formats}
+            // formats={formats}
           ></ReactQuill>
           <FormTextarea
             className="memory-track"
@@ -131,6 +114,13 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             onClick={(e) => {
               e.preventDefault();
               console.log(manualData);
+              uploadManual(manualData)
+                .then((res) => {
+                  console.log(res);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }}
           >
             Upload Manual
