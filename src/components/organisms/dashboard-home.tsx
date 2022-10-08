@@ -10,8 +10,12 @@ interface IDashboardHomeProps {}
 
 const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
   const { manuals, totalManual, loading } = useManuals();
-  const manuals1 = manuals.slice(0, 5);
-  const manuals2 = manuals.slice(5, 10);
+  let manuals1 = manuals?.slice(0, 5);
+  let manuals2 = manuals?.slice(5, 10);
+  if (!loading) {
+    manuals1 = manuals.slice(0, 5);
+    manuals2 = manuals.slice(5, 10);
+  }
   const [pageNumber, setPageNumber] = useState(1);
   return (
     <div className="dashboard_home">
