@@ -1,0 +1,31 @@
+.logo {
+  @apply w-28 absolute top-16 left-16;
+}
+.signin {
+  @apply relative bg-[#F9FAFC] w-full h-full min-h-screen p-16 flex items-center;
+  &_form {
+    @apply py-24 px-36 min-w-[26.5rem] rounded-[10px] border border-[#FFC6C1] w-fit mx-auto bg-white text-center;
+    box-shadow: 0px 4px 50px 1px rgba(0, 0, 0, 0.05);
+    &-title {
+      @apply text-2xl text-red font-bold mb-5;
+    }
+    &-input {
+      @apply mt-12 w-full h-14 rounded-md border border-[#D3D3D3] px-4 text-center focus:border-red;
+    }
+    &-btn {
+      @apply mt-7 bg-red w-full h-14 rounded-md text-white border border-red;
+    }
+    .hide {
+      @apply hidden;
+    }
+    .error {
+      @apply mt-4 text-sm;
+      &-msg {
+        @apply text-red;
+      }
+    }
+    &-note {
+      @apply mt-[4.5rem] max-w-[18.125rem] text-gray100 mx-auto;
+    }
+  }
+}

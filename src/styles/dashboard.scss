@@ -1,0 +1,151 @@
+.dashboard {
+  @apply flex bg-[#F9FAFC];
+  &_nav {
+    @apply bg-white fixed w-56 flex flex-col items-center pt-14 h-screen;
+  }
+  &_logo {
+    @apply w-24;
+  }
+  &_btn {
+    @apply bg-red200 flex gap-3 items-center justify-center text-white w-[125px] h-9 rounded-md mt-7;
+  }
+  &_links {
+    @apply mt-28;
+    .active {
+      @apply text-red;
+    }
+  }
+  &_link {
+    @apply flex items-center gap-5 mb-16 hover:text-red;
+  }
+  &_tab {
+    @apply pl-28 pr-56 w-[calc(100%-14rem)] ml-auto pb-9;
+  }
+  &_home {
+    @apply pt-28;
+    &-head {
+      @apply flex justify-between items-center w-full;
+    }
+    &-heading {
+      @apply text-[32px] font-bold;
+    }
+    &-profile {
+      @apply bg-red h-14 w-14 rounded-full text-white font-light flex items-center justify-center;
+    }
+  }
+}
+
+.content-wrapper {
+  @apply bg-white border border-[#E8E8E8] rounded;
+}
+.manual_count {
+  @apply pt-5 pb-1 pl-16 pr-20 mt-16 mb-6;
+  box-shadow: 0px 4px 60px 1px rgba(0, 0, 0, 0.05);
+  &-text {
+    @apply text-sm font-light text-[#9D9D9D] uppercase mb-4;
+  }
+  &-number {
+    @apply mb-4 text-5xl font-bold text-red200;
+  }
+  &-btn {
+    @apply mb-4 w-[8.375rem] h-11 bg-red rounded border border-red200 text-white;
+    @apply flex items-center justify-center gap-3;
+  }
+}
+.recent_manuals {
+  @apply p-12;
+  &-head {
+    @apply flex items-center justify-between w-full mb-7;
+    p {
+      @apply text-gray200;
+    }
+    a {
+      @apply text-red200 underline;
+    }
+  }
+  &-note {
+    @apply flex gap-7 items-center bg-[#EAF5FD] py-5 px-6 rounded;
+    p {
+      @apply max-w-[25.3125rem] text-sm text-gray200;
+      span {
+        @apply font-medium;
+      }
+    }
+    svg:last-child {
+      @apply ml-auto;
+    }
+  }
+  &-pagination {
+    @apply flex mt-8 gap-1.5 items-center text-[15px];
+  }
+}
+
+.manual {
+  &_items {
+    @apply mt-10;
+  }
+  &_item {
+    @apply flex gap-6 items-center border-b border-[#DFDFDF] py-5;
+    img {
+      @apply h-14 w-14 object-cover;
+    }
+    svg {
+      @apply ml-auto;
+    }
+    &-title {
+      @apply font-bold;
+    }
+    &-date {
+      @apply text-sm text-gray200 mt-2;
+    }
+  }
+}
+
+.upcoming {
+  @apply mt-24;
+  &_heading {
+    @apply text-2xl font-bold mb-12;
+  }
+  &_releases {
+    @apply flex gap-5;
+  }
+  &_release {
+    @apply max-w-xs border border-[#E8E8E8] bg-white;
+    &-icon {
+      @apply h-36 bg-[#F6FBFF] flex items-center justify-center;
+    }
+    &-text {
+      @apply px-8 py-7;
+    }
+    &-primary {
+      @apply text-xl font-bold mb-3 flex justify-between items-center;
+    }
+    &-secondary {
+      @apply text-sm;
+    }
+  }
+}
+
+.manuals {
+  @apply pt-[10.625rem];
+}
+.manual {
+  &_wrapper {
+    @apply mt-10 px-14 py-10;
+  }
+  &_head {
+    @apply flex justify-between items-center;
+    P {
+      @apply text-gray200;
+    }
+    &-select {
+      @apply text-sm px-4 py-2.5 text-gray200;
+    }
+  }
+}
+.pagination {
+  @apply flex items-center justify-between;
+  .entries {
+    @apply mt-8;
+  }
+}

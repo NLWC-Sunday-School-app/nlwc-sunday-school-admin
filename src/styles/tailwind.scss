@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "base/base";
+@import "signin";
+@import "dashboard";
+@import "manual-form";
