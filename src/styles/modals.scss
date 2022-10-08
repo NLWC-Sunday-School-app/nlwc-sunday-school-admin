@@ -34,7 +34,7 @@
       @apply h-9 w-32 rounded flex justify-center items-center gap-2;
     }
     button.keep {
-      @apply bg-[#A4BCCF];
+      background-color: #a4bccf;
     }
     button.confirm {
       @apply bg-red text-white;

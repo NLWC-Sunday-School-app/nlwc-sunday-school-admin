@@ -20,16 +20,16 @@
       @apply h-72;
     }
     label {
-      @apply absolute text-sm left-10 -top-2.5 bg-white px-3 text-[#144264];
+      @apply absolute text-sm left-10 -top-2.5 bg-white text-[#144264] px-3;
     }
   }
   &_btn {
     @apply bg-red200 hover:bg-red text-white w-full mt-5 rounded block ml-auto h-14;
   }
   .file_input {
-    @apply relative h-20 flex items-center mb-10 px-4 rounded border border-[#144264];
+    @apply relative h-20 flex items-center mb-10 px-4 border border-[#144264] rounded;
     label {
-      @apply absolute text-sm left-10 -top-2.5 bg-white px-3 text-[#144264];
+      @apply absolute text-sm left-10 -top-2.5 px-3 text-[#144264] bg-white;
     }
   }
 }
