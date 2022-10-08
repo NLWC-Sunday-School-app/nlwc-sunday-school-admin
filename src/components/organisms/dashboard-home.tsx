@@ -4,6 +4,7 @@ import ManualItem from "../molecules/manual-item";
 import UpcomingReleases from "./upcoming-releases";
 import { Link } from "react-router-dom";
 import useManuals from "../../hooks/get-manuals";
+import ConfirmDeleteModal from "../molecules/delete-confirm";
 
 interface IDashboardHomeProps {}
 
@@ -123,6 +124,7 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
                       imgUrl={manual.header_image}
                       title={manual.topic}
                       date={manual.manual_date}
+                      manualId={manual.id}
                     />
                   ))
                 : manuals2.map((manual, index) => (
@@ -131,6 +133,7 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
                       imgUrl={manual.header_image}
                       title={manual.topic}
                       date={manual.manual_date}
+                      manualId={manual.id}
                     />
                   ))}
             </div>
@@ -196,7 +199,6 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
           )}
         </>
       </ContentWrapper>
-
       <UpcomingReleases />
     </div>
   );

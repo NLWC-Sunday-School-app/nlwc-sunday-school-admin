@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { getAllManuals } from "../services/manual";
+import { IManuals } from "../types/types";
+
+
 
 const useAllManuals = () => {
-  const [manuals, setManuals] = useState([
-    { topic: "", header_image: "", manual_date: "" },
-  ]);
+  const [manuals, setManuals] = useState<IManuals[]>([]);
   const [loading, setLoading] = useState(true);
   const [sortBy, setSortBy] = useState<"newest" | "oldest">("newest");
   const [pageNumber, setPageNumber] = useState(1);
@@ -17,7 +18,7 @@ const useAllManuals = () => {
       .then((res) => {
         setManuals(res.data.data);
         setTotalManual(res.data.total);
-        setLastPage(res.data.last_page)
+        setLastPage(res.data.last_page);
         setLoading(false);
       })
       .catch((err) => {

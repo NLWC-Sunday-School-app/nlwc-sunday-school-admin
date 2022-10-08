@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { getManuals } from "../services/manual";
+import { IManuals } from "../types/types";
 
 const useManuals = () => {
-  const [manuals, setManuals] = useState([
-    { topic: "", header_image: "", manual_date: "" },
-  ]);
+  const [manuals, setManuals] = useState<IManuals[]>([]);
   const [loading, setLoading] = useState(true);
   const [totalManual, setTotalManual] = useState(0);
 

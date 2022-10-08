@@ -47,6 +47,7 @@ const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
               {manuals.map((manual, index) => (
                 <ManualItem
                   key={manual.topic}
+                  manualId={manual.id}
                   imgUrl={manual.header_image}
                   title={manual.topic}
                   date={manual.manual_date}

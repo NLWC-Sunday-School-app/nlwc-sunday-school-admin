@@ -19,7 +19,7 @@
     @apply flex items-center gap-5 mb-16 hover:text-red;
   }
   &_tab {
-    @apply pl-28 pr-56 w-[calc(100%-14rem)] ml-auto pb-9;
+    @apply pl-28 pr-56 w-[calc(100%-14rem)] ml-auto pb-9 min-h-screen;
   }
   &_home {
     @apply pt-28;
@@ -85,11 +85,11 @@
     @apply mt-10;
   }
   &_item {
-    @apply flex gap-6 items-center border-b border-[#DFDFDF] py-5;
+    @apply relative flex gap-6 items-center border-b border-[#DFDFDF] py-5;
     img {
       @apply h-14 w-14 object-cover;
     }
-    svg {
+    button {
       @apply ml-auto;
     }
     &-title {
@@ -97,6 +97,16 @@
     }
     &-date {
       @apply text-sm text-gray200 mt-2;
+    }
+  }
+  &_control {
+    @apply absolute -right-44 top-16 bg-white py-5 px-7 border border-gray200 rounded;
+    box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.04);
+    &-edit {
+      @apply flex text-[15px] text-[#144264] gap-2.5 items-center mb-6;
+    }
+    &-delete {
+      @apply flex text-[15px] text-red gap-2.5 items-center;
     }
   }
 }

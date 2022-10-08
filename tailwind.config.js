@@ -18,6 +18,7 @@ module.exports = {
       red200: "#9F0E02",
       gray100: "#9F9F9F",
       gray200: "#515151",
+      black: "#111111",
     }),
     columns: {
       auto: "auto",

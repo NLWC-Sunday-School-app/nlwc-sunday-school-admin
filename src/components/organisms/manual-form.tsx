@@ -7,9 +7,10 @@ import "react-quill/dist/quill.snow.css";
 import { useState } from "react";
 import { uploadManual } from "../../services/manual";
 import { IManualData } from "../../types/types";
+import { uploadImage } from "../../services/images";
+import SuccessModal from "../molecules/success-modal";
 
 interface IManualFormProps {}
-
 
 const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
   const modules = {
@@ -35,7 +36,10 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
     body: "",
     manual_date: "",
     summary: "",
+    memory_track: "",
   });
+  const [imageFile, setImageFile] = useState<File>();
+  const [uploadSucess, setUploadSuccess] = useState(false);
   return (
     <div className="manuals">
       <div className="dashboard_home-head">
@@ -70,6 +74,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
           />
           <FormInput
             label="Manual Date"
+            type="date"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, manual_date: target.value });
@@ -83,12 +88,24 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
               setManualData({ ...manualData, text: target.value });
             }}
           />
+          <div className="file_input">
+            <label htmlFor="header-image">Header Image</label>
+            <input
+              title="header-image"
+              type="file"
+              accept=".jpg,.jpeg,.png"
+              id="header-image"
+              onChange={(e) => {
+                if (e.target.files) setImageFile(e.target.files[0]);
+              }}
+            />
+          </div>
           <FormTextarea
             className="memory-track"
             label="Memory Track"
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
-              setManualData({ ...manualData, text: target.value });
+              setManualData({ ...manualData, memory_track: target.value });
             }}
           />
           <ReactQuill
@@ -114,19 +131,30 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             onClick={(e) => {
               e.preventDefault();
               console.log(manualData);
-              uploadManual(manualData)
-                .then((res) => {
-                  console.log(res);
-                })
-                .catch((err) => {
-                  console.log(err);
+              if (imageFile) {
+                uploadImage(imageFile).then((res) => {
+                  console.log(res.data);
+                  setManualData({
+                    ...manualData,
+                    header_image: res.data.image,
+                  });
+                  uploadManual(manualData)
+                    .then((res) => {
+                      console.log(res);
+                      setUploadSuccess(true);
+                    })
+                    .catch((err) => {
+                      console.log(err);
+                    });
                 });
+              }
             }}
           >
             Upload Manual
           </button>
         </form>
       </ContentWrapper>
+      {uploadSucess ? <SuccessModal /> : ""}
     </div>
   );
 };

@@ -1,0 +1,43 @@
+.success {
+  @apply fixed w-screen h-screen bg-black bg-opacity-70 top-0 left-0;
+  &_body {
+    @apply px-5 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-9;
+    @apply bg-white h-80 w-96 flex items-center justify-center flex-col;
+    a {
+      @apply absolute right-5 top-5 h-11 w-11 rounded-full bg-white flex items-center justify-center;
+      box-shadow: 0px 6px 60px 1px rgba(0, 0, 0, 0.12);
+    }
+    p {
+      @apply text-[#06602A] font-medium;
+    }
+  }
+}
+
+.delete {
+  @apply fixed w-screen h-screen bg-black bg-opacity-70 top-0 left-0;
+  &_body {
+    @apply px-5 py-10 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 gap-9;
+    @apply bg-white min-h-[224px] w-96 rounded flex flex-col justify-between;
+    &-head {
+      @apply flex justify-between;
+      p {
+        @apply text-red font-bold;
+      }
+    }
+    &-text {
+      @apply text-center max-w-[261px] mx-auto;
+    }
+  }
+  .button-wrap {
+    @apply flex justify-between;
+    button {
+      @apply h-9 w-32 rounded flex justify-center items-center gap-2;
+    }
+    button.keep {
+      @apply bg-[#A4BCCF];
+    }
+    button.confirm {
+      @apply bg-red text-white;
+    }
+  }
+}

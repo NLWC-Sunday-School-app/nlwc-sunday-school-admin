@@ -4,12 +4,15 @@ interface IFormTextareaProps extends React.HTMLProps<HTMLTextAreaElement> {
   label: string;
   inputProps?: React.HTMLProps<HTMLInputElement>;
   className: string;
+  value?: string;
 }
 
 const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
   label,
   className,
   onChange,
+  value,
+  ...props
 }) => {
   return (
     <div className="form_input">
@@ -21,6 +24,7 @@ const FormTextarea: React.FunctionComponent<IFormTextareaProps> = ({
         title={label}
         // {...inputProps}
         onChange={onChange}
+        defaultValue={value}
       ></textarea>
     </div>
   );
