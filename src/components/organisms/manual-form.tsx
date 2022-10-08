@@ -9,6 +9,7 @@ import { uploadManual } from "../../services/manual";
 import { IManualData } from "../../types/types";
 import { uploadImage } from "../../services/images";
 import SuccessModal from "../molecules/success-modal";
+import { Spinner } from "@chakra-ui/spinner";
 
 interface IManualFormProps {}
 
@@ -39,7 +40,9 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
     memory_track: "",
   });
   const [imageFile, setImageFile] = useState<File>();
+  const [uploading, setUploading] = useState(false);
   const [uploadSucess, setUploadSuccess] = useState(false);
+  const [error, setError] = useState("");
   return (
     <div className="manuals">
       <div className="dashboard_home-head">
@@ -130,6 +133,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             type="submit"
             onClick={(e) => {
               e.preventDefault();
+              setUploading(true);
               console.log(manualData);
               if (imageFile) {
                 uploadImage(imageFile).then((res) => {
@@ -142,16 +146,20 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
                     .then((res) => {
                       console.log(res);
                       setUploadSuccess(true);
+                      setUploading(false);
                     })
                     .catch((err) => {
                       console.log(err);
+                      setError("An error occured, please try agains");
+                      setUploading(false);
                     });
                 });
               }
             }}
           >
-            Upload Manual
+            {uploading ? <Spinner h="20px" w="20px" /> : "Upload Manual"}
           </button>
+          {error ? error : ""}
         </form>
       </ContentWrapper>
       {uploadSucess ? <SuccessModal /> : ""}
