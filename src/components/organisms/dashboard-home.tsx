@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContentWrapper from "../molecules/content-wrapper";
 import ManualItem from "../molecules/manual-item";
 import UpcomingReleases from "./upcoming-releases";
@@ -10,12 +10,13 @@ interface IDashboardHomeProps {}
 
 const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
   const { manuals, totalManual, loading } = useManuals();
-  let manuals1 = manuals?.slice(0, 5);
-  let manuals2 = manuals?.slice(5, 10);
-  if (!loading) {
-    manuals1 = manuals.slice(0, 5);
-    manuals2 = manuals.slice(5, 10);
-  }
+
+  const [manuals1, setManuals1] = useState(manuals?.slice(0, 5));
+  const [manuals2, setManuals2] = useState(manuals?.slice(5, 10));
+  useEffect(() => {
+    setManuals1(manuals.slice(0, 5))
+    setManuals2(manuals.slice(5, 10))
+  }, [manuals]);
   const [pageNumber, setPageNumber] = useState(1);
   return (
     <div className="dashboard_home">
