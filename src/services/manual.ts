@@ -8,7 +8,7 @@ export const getManual = (id: string) => request.get(`/manuals/${id}`);
 export const getAllManuals = (
   sortBy: "oldest" | "newest",
   pageNumber: number
-) => request.get(`/manuals?sortBy=${sortBy}&page=${pageNumber}`);
+) => request.get(`/manuals?sort=${sortBy}&page=${pageNumber}&useManualDate=true`);
 
 export const uploadManual = (manual: IManualData) =>
   request.post("/manuals", manual);
