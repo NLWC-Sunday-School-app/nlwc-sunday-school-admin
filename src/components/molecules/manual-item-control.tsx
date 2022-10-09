@@ -65,7 +65,7 @@ const ManualControl: React.FunctionComponent<IManualControlProps> = ({
         </svg>
         Delete Manual
       </button>
-      <ConfirmDeleteModal />
+      {/* <ConfirmDeleteModal /> */}
     </div>
   );
 };
