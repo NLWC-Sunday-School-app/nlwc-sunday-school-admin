@@ -1,4 +1,5 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 interface ISuccessModalProps {}
 
@@ -6,7 +7,7 @@ const SuccessModal: React.FunctionComponent<ISuccessModalProps> = ({}) => {
   return (
     <div className="success">
       <div className="success_body">
-        <a href="/" title="close" type="button">
+        <Link to="/" title="close" type="button">
           <svg
             width="16"
             height="16"
@@ -26,7 +27,7 @@ const SuccessModal: React.FunctionComponent<ISuccessModalProps> = ({}) => {
               </clipPath>
             </defs>
           </svg>
-        </a>
+        </Link>
 
         <svg
           width="136"
