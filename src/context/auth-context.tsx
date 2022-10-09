@@ -14,11 +14,13 @@ const defaultValue = {
 };
 export const UserContext = createContext<IUserContext>(defaultValue);
 
-const UserContextProvider: React.FC = () => {
+const UserContextProvider: React.FC<React.PropsWithChildren> = ({
+  children,
+}) => {
   const [user, setUser] = useState<IUser>({ access: false });
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      {/* {children} */}
+      {children}
     </UserContext.Provider>
   );
 };

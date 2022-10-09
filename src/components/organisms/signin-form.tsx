@@ -1,8 +1,16 @@
-import * as React from "react";
+import { useContext, useState } from "react";
+import { Router } from "react-router-dom";
+import { UserContext } from "../../context/auth-context";
+import { signin } from "../../services/auth";
+import { useHistory } from "react-router-dom";
 
 interface ISigninFormProps {}
 
 const SigninForm: React.FunctionComponent<ISigninFormProps> = (props) => {
+  const { setUser } = useContext(UserContext);
+  const [input, setInput] = useState("");
+  const [error, setError] = useState(false);
+  const history = useHistory();
   return (
     <form className="signin_form">
       <h1 className="signin_form-title">Sign in to Sunday School Admin</h1>
@@ -11,12 +19,29 @@ const SigninForm: React.FunctionComponent<ISigninFormProps> = (props) => {
         className="signin_form-input"
         type="text"
         placeholder="Type pass-key here"
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
       />
-      <div className="error hide">
+      <div className={`error ${error ? "" : "hide"}`}>
         <p className="error-msg">Password is incorrect</p>
         <p>Please check and confirm you typed it correctly.</p>
       </div>
-      <button className="signin_form-btn" type="submit">
+      <button
+        className="signin_form-btn"
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          if (signin(input)) {
+            setUser({ access: signin(input) });
+            console.log('correct');
+            
+            history.push("/");
+          } else {
+            setError(true);
+          }
+        }}
+      >
         Sign in
       </button>
       <p className="signin_form-note">
