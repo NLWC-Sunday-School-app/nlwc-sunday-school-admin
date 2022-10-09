@@ -9,7 +9,7 @@ interface IUserContext {
 }
 
 const defaultValue = {
-  user: { access: false },
+  user: { access: true },
   setUser: (user: IUser) => {},
 };
 export const UserContext = createContext<IUserContext>(defaultValue);
@@ -17,7 +17,7 @@ export const UserContext = createContext<IUserContext>(defaultValue);
 const UserContextProvider: React.FC<React.PropsWithChildren> = ({
   children,
 }) => {
-  const [user, setUser] = useState<IUser>({ access: false });
+  const [user, setUser] = useState<IUser>({ access: true });
   return (
     <UserContext.Provider value={{ user, setUser }}>
       {children}

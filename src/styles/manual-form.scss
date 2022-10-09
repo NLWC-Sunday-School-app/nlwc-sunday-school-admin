@@ -32,6 +32,9 @@
       @apply absolute text-sm left-10 -top-2.5 px-3 text-[#144264] bg-white;
     }
   }
+  .add_text {
+    @apply flex items-center justify-center bg-[#E7F5FF] mb-10 gap-2.5 h-9 w-36 rounded;
+  }
 }
 
 .ql-toolbar.ql-snow,

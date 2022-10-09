@@ -24,7 +24,7 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
 
   const onClickOutside = (e: MouseEvent) => {
     const target = e?.target as HTMLInputElement;
-    if (!target?.className.includes("manual_item")) {
+    if (!target?.className.includes("manual_control")) {
       setShowControl(false);
     }
   };

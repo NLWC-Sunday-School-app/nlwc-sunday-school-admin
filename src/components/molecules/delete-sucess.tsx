@@ -5,11 +5,11 @@ interface IDeleteSucessModalProps {}
 
 const DeleteSucessModal: React.FunctionComponent<
   IDeleteSucessModalProps
-> = ({}) => {
+> = () => {
   return (
     <div className="success">
       <div className="success_body">
-        <Link to="/" title="close" type="button">
+        <Link to="/new" title="close" type="button">
           <svg
             width="16"
             height="16"

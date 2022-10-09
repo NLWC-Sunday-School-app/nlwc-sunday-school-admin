@@ -8,7 +8,7 @@ const useEditManual = () => {
   const [manualData, setManualData] = useState<IManualData>({
     theme: "",
     topic: "",
-    text: "",
+    text: [""],
     lesson: "",
     header_image: "test",
     body: "",
