@@ -19,13 +19,13 @@ const useEditManual = () => {
   const [loading, setLoading] = useState(true);
   const [uploading, setupLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File>();
+  const [uploadSucess, setUploadSuccess] = useState(false);
 
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
     getManual(id)
       .then((res) => {
-        console.log(res.data);
         setManualData(res.data);
         setLoading(false);
       })
@@ -35,24 +35,39 @@ const useEditManual = () => {
       });
   }, [id]);
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    setupLoading(true);
     e.preventDefault();
     console.log(manualData);
 
     if (imageFile) {
+      setupLoading(true);
       uploadImage(imageFile).then((res) => {
         setManualData({
           ...manualData,
           header_image: res.data.image,
         });
-        editManual(id, manualData)
+        editManual(id, { ...manualData, header_image: res.data.image })
           .then((res) => {
+            setUploadSuccess(true);
             console.log(res);
+            setupLoading(false);
           })
           .catch((err) => {
             console.log(err);
+            setupLoading(false);
           });
       });
+    } else {
+      setupLoading(true);
+      editManual(id, manualData)
+        .then((res) => {
+          setUploadSuccess(true);
+          console.log(res);
+          setupLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setupLoading(false);
+        });
     }
   };
   return {
@@ -62,6 +77,7 @@ const useEditManual = () => {
     handleEdit,
     uploading,
     setImageFile,
+    uploadSucess,
   };
 };
 export default useEditManual;

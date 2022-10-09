@@ -14,8 +14,8 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
   const [manuals1, setManuals1] = useState(manuals?.slice(0, 5));
   const [manuals2, setManuals2] = useState(manuals?.slice(5, 10));
   useEffect(() => {
-    setManuals1(manuals.slice(0, 5))
-    setManuals2(manuals.slice(5, 10))
+    setManuals1(manuals.slice(0, 5));
+    setManuals2(manuals.slice(5, 10));
   }, [manuals]);
   const [pageNumber, setPageNumber] = useState(1);
   return (
@@ -31,7 +31,11 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
           <p className="manual_count-text">Total number of manuals added</p>
           <div className="dashboard_home-head">
             <p className="manual_count-number">
-              {loading ? "..." : totalManual}
+              {loading
+                ? "..."
+                : totalManual > 99
+                ? "0" + totalManual
+                : "00" + totalManual}
             </p>
             <Link to="/new" className="manual_count-btn" type="button">
               <svg

@@ -23,7 +23,14 @@ const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
       <ContentWrapper className="manual_wrapper">
         <>
           <div className="manual_head">
-            <p>{loading ? "0" : totalManual} Manuals Added</p>
+            <p>
+              {loading
+                ? "0"
+                : totalManual > 99
+                ? "0" + totalManual
+                : "00" + totalManual}{" "}
+              Manuals Added
+            </p>
             <ContentWrapper className="manual_head-select">
               <select
                 name="sort by"

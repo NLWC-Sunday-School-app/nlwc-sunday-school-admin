@@ -11,7 +11,9 @@ const DashboardNav: React.FunctionComponent<IDashboardNavProps> = ({
 }) => {
   return (
     <div className="dashboard_nav">
-      <img className="dashboard_logo" src={Logo} alt="Logo" />
+      <a href="/">
+        <img className="dashboard_logo" src={Logo} alt="Logo" />
+      </a>
       <Link to="/new" className="dashboard_btn" type="button">
         <svg
           width="12"

@@ -142,7 +142,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
                     ...manualData,
                     header_image: res.data.image,
                   });
-                  uploadManual(manualData)
+                  uploadManual({ ...manualData, header_image: res.data.image })
                     .then((res) => {
                       console.log(res);
                       setUploadSuccess(true);
