@@ -29,7 +29,8 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
     ],
   };
 
-  const { manualData, setManualData, loading, handleEdit } = useEditManual();
+  const { manualData, setManualData, loading, handleEdit, setImageFile } = useEditManual();
+
   return (
     <div className="manuals">
       <div className="dashboard_home-head">
@@ -69,7 +70,16 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
               }}
             />
             <div className="file_input">
-              <input title="header image" type="file" />
+              <label htmlFor="header-image">Header Image</label>
+              <input
+                title="header-image"
+                type="file"
+                accept=".jpg,.jpeg,.png"
+                id="header-image"
+                onChange={(e) => {
+                  if (e.target.files) setImageFile(e.target.files[0]);
+                }}
+              />
             </div>
             <FormInput
               label="Manual Date"

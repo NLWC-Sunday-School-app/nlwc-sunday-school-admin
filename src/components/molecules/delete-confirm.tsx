@@ -1,16 +1,28 @@
+import { Spinner } from "@chakra-ui/spinner";
 import * as React from "react";
+import { deleteManual } from "../../services/manual";
 
-interface IConfirmDeleteModalProps {}
+interface IConfirmDeleteModalProps {
+  title: string;
+  manualId: string;
+  onClose: () => void;
+  onConfirmDelete: () => void;
+  deleting: boolean;
+}
 
-const ConfirmDeleteModal: React.FunctionComponent<
-  IConfirmDeleteModalProps
-> = () => {
+const ConfirmDeleteModal: React.FunctionComponent<IConfirmDeleteModalProps> = ({
+  title,
+  manualId,
+  onClose,
+  onConfirmDelete,
+  deleting,
+}) => {
   return (
     <div className="delete">
       <div className="delete_body">
         <div className="delete_body-head">
           <p>Delete Manual</p>
-          <button title="cancel" type="button">
+          <button title="cancel" type="button" onClick={onClose}>
             <svg
               width="16"
               height="16"
@@ -33,10 +45,10 @@ const ConfirmDeleteModal: React.FunctionComponent<
           </button>
         </div>
         <p className="delete_body-text">
-          Are you sure you want to delete this manual?
+          Are you sure you want to delete {title}?
         </p>
         <div className="button-wrap">
-          <button className="confirm">
+          <button className="confirm" onClick={onConfirmDelete}>
             <svg
               width="14"
               height="14"
@@ -56,9 +68,11 @@ const ConfirmDeleteModal: React.FunctionComponent<
                 </clipPath>
               </defs>
             </svg>
-            Yes, Delete it
+            {deleting ? <Spinner h="20px" w="20px" /> : "Yes, Delete it"}
           </button>
-          <button className="keep">No, keep it</button>
+          <button className="keep" onClick={onClose}>
+            No, keep it
+          </button>
         </div>
       </div>
     </div>

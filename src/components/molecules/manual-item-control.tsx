@@ -1,13 +1,13 @@
-import * as React from "react";
 import { Link } from "react-router-dom";
-import ConfirmDeleteModal from "./delete-confirm";
 
 interface IManualControlProps {
   manualId: string;
+  onDelete: () => void;
 }
 
 const ManualControl: React.FunctionComponent<IManualControlProps> = ({
   manualId,
+  onDelete,
 }) => {
   return (
     <div className="manual_control">
@@ -38,7 +38,11 @@ const ManualControl: React.FunctionComponent<IManualControlProps> = ({
         </svg>
         Edit Manual
       </Link>
-      <button className="manual_control-delete" type="button">
+      <button
+        className="manual_control-delete"
+        type="button"
+        onClick={onDelete}
+      >
         <svg
           width="14"
           height="15"
@@ -65,7 +69,6 @@ const ManualControl: React.FunctionComponent<IManualControlProps> = ({
         </svg>
         Delete Manual
       </button>
-      {/* <ConfirmDeleteModal /> */}
     </div>
   );
 };

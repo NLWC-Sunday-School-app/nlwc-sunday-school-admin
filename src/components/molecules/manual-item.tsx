@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState } from "react";
+import { deleteManual } from "../../services/manual";
+import ConfirmDeleteModal from "./delete-confirm";
+import DeleteSucessModal from "./delete-sucess";
 import ManualControl from "./manual-item-control";
 
 interface IManualItemProps {
@@ -15,6 +18,10 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
   manualId,
 }) => {
   const [showControl, setShowControl] = useState(false);
+  const [deleteItem, setDeleteItem] = useState(false);
+  const [deleteSuccess, setDeleteSucess] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
   const onClickOutside = (e: MouseEvent) => {
     const target = e?.target as HTMLInputElement;
     if (!target?.className.includes("manual_item")) {
@@ -28,7 +35,15 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
     <div className="manual_item">
       <img src={imgUrl} alt="manual" />
       <div>
-        <h3 className="manual_item-title">{title}</h3>
+        <h3 className="manual_item-title">
+          <a
+            href={`https://manuals.nlwc.church/manual/${manualId}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {title}
+          </a>
+        </h3>
         <p className="manual_item-date">Date added: {date}</p>
       </div>
       <button type="button" title="tool" onClick={() => setShowControl(true)}>
@@ -57,7 +72,36 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
           </defs>
         </svg>
       </button>
-      {showControl ? <ManualControl manualId={manualId} /> : ""}
+      {showControl ? (
+        <ManualControl
+          manualId={manualId}
+          onDelete={() => {
+            setDeleteItem(true);
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {deleteItem ? (
+        <ConfirmDeleteModal
+          onConfirmDelete={() => {
+            setDeleting(true);
+            deleteManual(manualId).then((res) => {
+              setDeleteItem(false);
+              setDeleteSucess(true);
+            });
+          }}
+          deleting={deleting}
+          manualId={manualId}
+          title={title}
+          onClose={() => {
+            setDeleteItem(false);
+          }}
+        />
+      ) : (
+        ""
+      )}
+      {deleteSuccess ? <DeleteSucessModal /> : ""}
     </div>
   );
 };

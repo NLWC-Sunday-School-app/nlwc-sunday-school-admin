@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { uploadImage } from "../services/images";
 import { editManual, getManual } from "../services/manual";
 import { IManualData } from "../types/types";
 
@@ -17,6 +18,8 @@ const useEditManual = () => {
   });
   const [loading, setLoading] = useState(true);
   const [uploading, setupLoading] = useState(false);
+  const [imageFile, setImageFile] = useState<File>();
+
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -36,14 +39,29 @@ const useEditManual = () => {
     e.preventDefault();
     console.log(manualData);
 
-    editManual(id, manualData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
+    if (imageFile) {
+      uploadImage(imageFile).then((res) => {
+        setManualData({
+          ...manualData,
+          header_image: res.data.image,
+        });
+        editManual(id, manualData)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
+    }
   };
-  return { manualData, setManualData, loading, handleEdit, uploading };
+  return {
+    manualData,
+    setManualData,
+    loading,
+    handleEdit,
+    uploading,
+    setImageFile,
+  };
 };
 export default useEditManual;
