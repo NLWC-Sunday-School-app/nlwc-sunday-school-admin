@@ -114,7 +114,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
               showTip={index === 0 && showBibleTextTip}
               tip={{
                 title: "Bible Text Tip",
-                text: "...",
+                text: "Type the book name in full. e.g. Galatians not Gal.",
               }}
             />
           ))}

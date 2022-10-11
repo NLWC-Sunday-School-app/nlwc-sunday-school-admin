@@ -130,7 +130,7 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                   showTip={index === 0 && showBibleTextTip}
                   tip={{
                     title: "Bible Text Tip",
-                    text: "...",
+                    text: "Type the book name in full. e.g. Galatians not Gal.",
                   }}
                 />
               ))}
