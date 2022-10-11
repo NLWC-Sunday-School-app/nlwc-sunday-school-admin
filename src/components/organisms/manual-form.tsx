@@ -38,11 +38,17 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
     manual_date: "",
     summary: "",
     memory_track: "",
+    views: 0,
   });
   const [imageFile, setImageFile] = useState<File>();
   const [uploading, setUploading] = useState(false);
   const [uploadSucess, setUploadSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [showLessonNumberTip, setShowLessonNumberTip] = useState(false);
+  const [showBibleTextTip, setShowBibleTextTip] = useState(false);
+  const [showMemoryTrackTip, setShowMemoryTrackTip] = useState(false);
+  const [showConclusionTip, setShowConclusionTip] = useState(false);
+
   return (
     <div className="manuals">
       <div className="dashboard_home-head">
@@ -65,6 +71,14 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             onChange={(e) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, lesson: target.value });
+            }}
+            onFocus={() => {
+              setShowLessonNumberTip(true);
+            }}
+            showTip={showLessonNumberTip}
+            tip={{
+              title: "Lesson Number Tip",
+              text: "Kindly write the lesson number in numbers not words. e.g. 4, 28 etc.",
             }}
           />
           <FormInput
@@ -93,6 +107,14 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
                 const updatedText = [...manualData.text];
                 updatedText[index] = target.value;
                 setManualData({ ...manualData, text: [...updatedText] });
+              }}
+              onFocus={() => {
+                setShowBibleTextTip(true);
+              }}
+              showTip={index === 0 && showBibleTextTip}
+              tip={{
+                title: "Bible Text Tip",
+                text: "...",
               }}
             />
           ))}
@@ -151,6 +173,14 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, memory_track: target.value });
             }}
+            onFocus={() => {
+              setShowMemoryTrackTip(true);
+            }}
+            showTip={showMemoryTrackTip}
+            tip={{
+              title: "Memory Track Tip",
+              text: "If the lesson does not have a memory track, you do not need to type any text in the box.",
+            }}
           />
           <ReactQuill
             theme="snow"
@@ -168,33 +198,45 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
               const target = e.target as HTMLInputElement;
               setManualData({ ...manualData, summary: target.value });
             }}
+            onFocus={() => {
+              setShowConclusionTip(true);
+            }}
+            showTip={showConclusionTip}
+            tip={{
+              title: "Conclusion Tip",
+              text: "If the lesson does not have a conclusion, you do not need to type any text in the box.",
+            }}
           />
           <button
             className="form_btn"
             type="submit"
             onClick={(e) => {
               e.preventDefault();
-              setUploading(true);
-              console.log(manualData);
               if (imageFile) {
-                uploadImage(imageFile).then((res) => {
-                  console.log(res.data);
-                  setManualData({
-                    ...manualData,
-                    header_image: res.data.image,
-                  });
-                  uploadManual({ ...manualData, header_image: res.data.image })
-                    .then((res) => {
-                      console.log(res);
-                      setUploadSuccess(true);
-                      setUploading(false);
-                    })
-                    .catch((err) => {
-                      console.log(err);
-                      setError("An error occured, please try agains");
-                      setUploading(false);
+                setUploading(true);
+                setError("");
+                uploadImage(imageFile)
+                  .then((res) => {
+                    setManualData({
+                      ...manualData,
+                      header_image: res.data.image,
                     });
-                });
+                    return uploadManual({
+                      ...manualData,
+                      header_image: res.data.image,
+                    });
+                  })
+                  .then((res) => {
+                    setUploadSuccess(true);
+                    setUploading(false);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                    setError("An error occured, please try agains");
+                    setUploading(false);
+                  });
+              } else {
+                setError("Please select a header image.");
               }
             }}
           >

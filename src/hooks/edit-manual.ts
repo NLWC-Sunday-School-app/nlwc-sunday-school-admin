@@ -15,11 +15,13 @@ const useEditManual = () => {
     manual_date: "",
     summary: "",
     memory_track: "",
+    views: 0,
   });
   const [loading, setLoading] = useState(true);
   const [uploading, setupLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File>();
   const [uploadSucess, setUploadSuccess] = useState(false);
+  const [uploadError, setUploadError] = useState("");
 
   const { id } = useParams<{ id: string }>();
 
@@ -34,25 +36,25 @@ const useEditManual = () => {
         setLoading(false);
       });
   }, [id]);
+
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    console.log(manualData);
-
     if (imageFile) {
       setupLoading(true);
       uploadImage(imageFile).then((res) => {
         setManualData({
           ...manualData,
+          // text: JSON.parse(manualData.text),
           header_image: res.data.image,
         });
         editManual(id, { ...manualData, header_image: res.data.image })
           .then((res) => {
             setUploadSuccess(true);
-            console.log(res);
             setupLoading(false);
           })
           .catch((err) => {
             console.log(err);
+            setUploadError("An error occured, please try again.");
             setupLoading(false);
           });
       });
@@ -61,11 +63,11 @@ const useEditManual = () => {
       editManual(id, manualData)
         .then((res) => {
           setUploadSuccess(true);
-          console.log(res);
           setupLoading(false);
         })
         .catch((err) => {
           console.log(err);
+          setUploadError("An error occured, please try again.");
           setupLoading(false);
         });
     }
@@ -78,6 +80,7 @@ const useEditManual = () => {
     uploading,
     setImageFile,
     uploadSucess,
+    uploadError,
   };
 };
 export default useEditManual;

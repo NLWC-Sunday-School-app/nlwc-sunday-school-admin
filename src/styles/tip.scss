@@ -1,0 +1,9 @@
+.tip {
+  @apply bg-[#E4F4FF] px-7 py-5 absolute w-fit rounded top-0 -right-80;
+  &_heading {
+    @apply flex gap-3 items-center text-sm font-medium mb-5;
+  }
+  &_body {
+    @apply text-xs max-w-[11rem];
+  }
+}

@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
-import { Router } from "react-router-dom";
 import { UserContext } from "../../context/auth-context";
 import { signin } from "../../services/auth";
 import { useHistory } from "react-router-dom";
+import { saveUserSessionToLocal } from "../../utils/user-session";
 
 interface ISigninFormProps {}
 
@@ -33,9 +33,8 @@ const SigninForm: React.FunctionComponent<ISigninFormProps> = (props) => {
         onClick={(e) => {
           e.preventDefault();
           if (signin(input)) {
+            saveUserSessionToLocal();
             setUser({ access: signin(input) });
-            console.log('correct');
-            
             history.push("/");
           } else {
             setError(true);

@@ -10,8 +10,9 @@ export interface IManualData {
   text: string[];
   lesson: string;
   header_image: string;
-  memory_track: string
+  memory_track: string;
   manual_date: string;
   body: string;
   summary: string;
+  views: number;
 }

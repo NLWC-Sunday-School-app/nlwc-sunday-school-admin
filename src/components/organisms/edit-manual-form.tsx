@@ -3,11 +3,7 @@ import FormInput from "../molecules/form-input";
 import FormTextarea from "../molecules/form-textarea";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
-import { useEffect, useState } from "react";
-import { uploadManual } from "../../services/manual";
-import { IManualData } from "../../types/types";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 import useEditManual from "../../hooks/edit-manual";
 import { Spinner } from "@chakra-ui/spinner";
 import SuccessModal from "../molecules/success-modal";
@@ -39,7 +35,13 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
     setImageFile,
     uploading,
     uploadSucess,
+    uploadError,
   } = useEditManual();
+
+  const [showLessonNumberTip, setShowLessonNumberTip] = useState(false);
+  const [showBibleTextTip, setShowBibleTextTip] = useState(false);
+  const [showMemoryTrackTip, setShowMemoryTrackTip] = useState(false);
+  const [showConclusionTip, setShowConclusionTip] = useState(false);
 
   return (
     <div className="manuals">
@@ -71,6 +73,14 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                 onChange={(e) => {
                   const target = e.target as HTMLInputElement;
                   setManualData({ ...manualData, lesson: target.value });
+                }}
+                onFocus={() => {
+                  setShowLessonNumberTip(true);
+                }}
+                showTip={showLessonNumberTip}
+                tip={{
+                  title: "Lesson Number Tip",
+                  text: "Kindly write the lesson number in numbers not words. e.g. 4, 28 etc.",
                 }}
               />
               <FormInput
@@ -113,6 +123,14 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                     const updatedText = [...manualData.text];
                     updatedText[index] = target.value;
                     setManualData({ ...manualData, text: [...updatedText] });
+                  }}
+                  onFocus={() => {
+                    setShowBibleTextTip(true);
+                  }}
+                  showTip={index === 0 && showBibleTextTip}
+                  tip={{
+                    title: "Bible Text Tip",
+                    text: "...",
                   }}
                 />
               ))}
@@ -160,6 +178,14 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                   const target = e.target as HTMLInputElement;
                   setManualData({ ...manualData, memory_track: target.value });
                 }}
+                onFocus={() => {
+                  setShowMemoryTrackTip(true);
+                }}
+                showTip={showMemoryTrackTip}
+                tip={{
+                  title: "Memory Track Tip",
+                  text: "If the lesson does not have a memory track, you do not need to type any text in the box.",
+                }}
               />
               <ReactQuill
                 theme="snow"
@@ -178,12 +204,21 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                   const target = e.target as HTMLInputElement;
                   setManualData({ ...manualData, summary: target.value });
                 }}
+                onFocus={() => {
+                  setShowConclusionTip(true);
+                }}
+                showTip={showConclusionTip}
+                tip={{
+                  title: "Conclusion Tip",
+                  text: "If the lesson does not have a conclusion, you do not need to type any text in the box.",
+                }}
               />
               <button className="form_btn" type="submit" onClick={handleEdit}>
                 {uploading ? <Spinner h="20px" w="20px" /> : "Upload Manual"}
               </button>
             </form>
             {uploadSucess ? <SuccessModal /> : ""}
+            {uploadError ? uploadError : ""}
           </>
         </ContentWrapper>
       )}

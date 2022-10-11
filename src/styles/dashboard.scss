@@ -19,7 +19,7 @@
     @apply flex items-center gap-5 mb-16 hover:text-red;
   }
   &_tab {
-    @apply pl-28 pr-56 w-[calc(100%-14rem)] ml-auto pb-9 min-h-screen;
+    @apply pl-28 pr-28 w-[calc(100%-14rem)] ml-auto pb-9 min-h-screen;
   }
   &_home {
     @apply pt-28;
