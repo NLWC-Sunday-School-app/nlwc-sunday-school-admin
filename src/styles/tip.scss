@@ -4,6 +4,6 @@
     @apply flex gap-3 items-center text-sm font-medium mb-5;
   }
   &_body {
-    @apply text-xs max-w-[11rem];
+    @apply max-w-[11rem] text-xs;
   }
 }
