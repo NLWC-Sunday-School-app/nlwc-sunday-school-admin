@@ -14,6 +14,6 @@ export const uploadManual = (manual: IManualData) =>
   request.post("/manuals", manual);
 
 export const editManual = (id: string, manual: IManualData) =>
-  request.patch(`/manuals/views/${id}`, manual);
+  request.patch(`/manuals/${id}`, manual);
 
 export const deleteManual = (id: string) => request.delete(`/manuals/${id}`);
