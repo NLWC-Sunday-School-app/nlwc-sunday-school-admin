@@ -31,8 +31,17 @@
   }
   .file_input {
     @apply relative h-20 flex items-center mb-10 px-4 border border-[#144264] rounded;
-    label {
+    .label {
       @apply absolute text-sm left-10 -top-2.5 px-3 text-[#144264] bg-white;
+    }
+    input {
+      @apply hidden;
+    }
+    button {
+      @apply flex items-center gap-2 bg-[#E7F5FF] text-sm h-8 w-[70px] justify-center ml-auto;
+    }
+    .image_edit-btn {
+      @apply inline-flex items-center bg-[#144264] py-2.5 px-3 rounded text-white text-sm gap-3 mr-4;
     }
   }
   .add_text {

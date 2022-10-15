@@ -78,6 +78,7 @@ const useEditManual = () => {
     loading,
     handleEdit,
     uploading,
+    imageFile,
     setImageFile,
     uploadSucess,
     uploadError,
