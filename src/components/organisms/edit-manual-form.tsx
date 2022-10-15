@@ -7,6 +7,7 @@ import { useState } from "react";
 import useEditManual from "../../hooks/edit-manual";
 import { Spinner } from "@chakra-ui/spinner";
 import SuccessModal from "../molecules/success-modal";
+import Tip from "../molecules/tip";
 
 interface IEditManualFormProps {}
 
@@ -170,49 +171,65 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                 </svg>
                 Add bible text
               </button>
-              <FormTextarea
-                className="memory-track"
-                label="Memory Track"
-                value={manualData.memory_track}
-                onChange={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  setManualData({ ...manualData, memory_track: target.value });
-                }}
-                onFocus={() => {
-                  setShowMemoryTrackTip(true);
-                }}
-                showTip={showMemoryTrackTip}
-                tip={{
-                  title: "Memory Track Tip",
-                  text: "If the lesson does not have a memory track, you do not need to type any text in the box.",
-                }}
-              />
-              <ReactQuill
-                theme="snow"
-                value={manualData.body}
-                onChange={(e) => {
-                  setManualData({ ...manualData, body: e });
-                }}
-                modules={modules}
-                // formats={formats}
-              ></ReactQuill>
-              <FormTextarea
-                className="memory-track"
-                label="Conclusion"
-                value={manualData.summary}
-                onChange={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  setManualData({ ...manualData, summary: target.value });
-                }}
-                onFocus={() => {
-                  setShowConclusionTip(true);
-                }}
-                showTip={showConclusionTip}
-                tip={{
-                  title: "Conclusion Tip",
-                  text: "If the lesson does not have a conclusion, you do not need to type any text in the box.",
-                }}
-              />
+              <div className="form_input">
+                <label htmlFor="memory">Memory Track</label>
+                <ReactQuill
+                  className="memory-track"
+                  theme="snow"
+                  value={manualData.memory_track}
+                  onChange={(e) => {
+                    setManualData({ ...manualData, memory_track: e });
+                  }}
+                  modules={modules}
+                  onFocus={() => {
+                    setShowMemoryTrackTip(true);
+                  }}
+                />
+                {showMemoryTrackTip ? (
+                  <Tip
+                    tipText="If the lesson does not have a memory track, you do not need to type any text in the box."
+                    tipTitle="Memory Track Tip"
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="form_input">
+                <label htmlFor="manual_body">Body of Manual</label>
+                <ReactQuill
+                  theme="snow"
+                  className="manual_body"
+                  value={manualData.body}
+                  onChange={(e) => {
+                    setManualData({ ...manualData, body: e });
+                  }}
+                  modules={modules}
+                  // formats={formats}
+                />
+              </div>
+              <div className="form_input">
+                <label htmlFor="Conclusion">Conclusion</label>
+                <ReactQuill
+                  className="memory-track"
+                  theme="snow"
+                  value={manualData.summary}
+                  onChange={(e) => {
+                    setManualData({ ...manualData, summary: e });
+                  }}
+                  modules={modules}
+                  onFocus={() => {
+                    setShowConclusionTip(true);
+                  }}
+                />
+                {showConclusionTip ? (
+                  <Tip
+                    tipText="If the lesson does not have a conclusion, you do not need to type any text in the box."
+                    tipTitle="Conclusion Tip"
+                  />
+                ) : (
+                  ""
+                )}
+              </div>
               <button className="form_btn" type="submit" onClick={handleEdit}>
                 {uploading ? <Spinner h="20px" w="20px" /> : "Upload Manual"}
               </button>

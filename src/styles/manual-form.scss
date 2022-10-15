@@ -60,7 +60,10 @@
 .ql-editor h6 {
   font-family: "Clearface" !important;
 }
-.manual_body{
+.ql-editor {
+  @apply text-base;
+}
+.manual_body {
   .ql-toolbar.ql-snow + .ql-container.ql-snow {
     @apply h-[38.375rem] block;
   }
