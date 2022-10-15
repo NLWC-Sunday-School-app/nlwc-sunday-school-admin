@@ -39,6 +39,7 @@ const useEditManual = () => {
 
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
+    setUploadError("");
     if (imageFile) {
       setupLoading(true);
       uploadImage(imageFile).then((res) => {
