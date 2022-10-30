@@ -134,6 +134,7 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
                       title={manual.topic}
                       date={manual.manual_date}
                       manualId={manual.id}
+                      views={manual.views}
                     />
                   ))
                 : manuals2.map((manual, index) => (
@@ -143,6 +144,7 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
                       title={manual.topic}
                       date={manual.manual_date}
                       manualId={manual.id}
+                      views={manual.views}
                     />
                   ))}
             </div>

@@ -3,6 +3,7 @@ export interface IManuals {
   header_image: string;
   manual_date: string;
   id: string;
+  views: number;
 }
 export interface IManualData {
   theme: string;

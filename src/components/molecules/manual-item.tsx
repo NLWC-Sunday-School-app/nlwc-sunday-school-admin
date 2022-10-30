@@ -9,6 +9,7 @@ interface IManualItemProps {
   title: string;
   date: string;
   manualId: string;
+  views: number;
 }
 
 const ManualItem: React.FunctionComponent<IManualItemProps> = ({
@@ -16,6 +17,7 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
   title,
   date,
   manualId,
+  views,
 }) => {
   const [showControl, setShowControl] = useState(false);
   const [deleteItem, setDeleteItem] = useState(false);
@@ -44,7 +46,38 @@ const ManualItem: React.FunctionComponent<IManualItemProps> = ({
             {title}
           </a>
         </h3>
-        <p className="manual_item-date">Date added: {date}</p>
+        <div className="manual_item-note">
+          <p className="manual_item-date">Date added: {date}</p>
+
+          <div className="manual_item-views">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 15 15"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_353_281)">
+                <path
+                  d="M14.0242 7.325C14.0078 7.28125 13.5429 6.25313 12.5148 5.21953C11.1422 3.85234 9.40856 3.125 7.49997 3.125C5.59138 3.125 3.85778 3.85234 2.48513 5.21953C1.457 6.25313 0.992157 7.28125 0.975751 7.325C0.951334 7.38011 0.938721 7.43972 0.938721 7.5C0.938721 7.56028 0.951334 7.61989 0.975751 7.675C0.992157 7.71875 1.457 8.74687 2.48513 9.78047C3.85778 11.1477 5.59138 11.875 7.49997 11.875C9.40856 11.875 11.1422 11.1477 12.5148 9.78047C13.5429 8.74687 14.0078 7.71875 14.0242 7.675C14.0486 7.61989 14.0612 7.56028 14.0612 7.5C14.0612 7.43972 14.0486 7.38011 14.0242 7.325ZM7.49997 5.53125C7.88935 5.53125 8.26999 5.64672 8.59375 5.86304C8.91751 6.07937 9.16985 6.38685 9.31886 6.74659C9.46787 7.10633 9.50686 7.50218 9.43089 7.88408C9.35493 8.26598 9.16742 8.61678 8.89209 8.89212C8.61675 9.16745 8.26595 9.35496 7.88405 9.43092C7.50215 9.50689 7.1063 9.4679 6.74656 9.31889C6.38682 9.16988 6.07934 8.91754 5.86301 8.59378C5.64668 8.27002 5.53122 7.88938 5.53122 7.5C5.53122 6.97785 5.73864 6.4771 6.10785 6.10788C6.47707 5.73867 6.97782 5.53125 7.49997 5.53125Z"
+                  fill="#515151"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0_353_281">
+                  <rect
+                    width="14"
+                    height="14"
+                    fill="white"
+                    transform="translate(0.5 0.5)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+            <span>Views:</span>
+            <span>{views}</span>
+          </div>
+        </div>
       </div>
       <button type="button" title="tool" onClick={() => setShowControl(true)}>
         <svg

@@ -58,6 +58,7 @@ const AllManuals: React.FunctionComponent<IAllManualsProps> = (props) => {
                   imgUrl={manual.header_image}
                   title={manual.topic}
                   date={manual.manual_date}
+                  views={manual.views}
                 />
               ))}
             </div>

@@ -95,8 +95,14 @@
     &-title {
       @apply font-bold;
     }
+    &-note {
+      @apply flex gap-2 items-center mt-2;
+    }
+    &-views {
+      @apply flex gap-2 items-center;
+    }
     &-date {
-      @apply text-sm text-gray200 mt-2;
+      @apply text-sm text-gray200 pr-2 border-r;
     }
   }
   &_control {

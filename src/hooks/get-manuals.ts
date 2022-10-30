@@ -10,6 +10,8 @@ const useManuals = () => {
   useEffect(() => {
     getManuals()
       .then((res) => {
+        console.log(res.data.data);
+        
         setManuals(res.data.data);
         setTotalManual(res.data.total);
         setLoading(false);
