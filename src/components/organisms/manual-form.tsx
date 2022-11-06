@@ -314,17 +314,21 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
               if (imageFile) {
                 setUploading(true);
                 setError("");
-                uploadImage(imageFile)
-                  .then((res) => {
-                    setManualData({
-                      ...manualData,
-                      header_image: res.data.image,
-                    });
-                    return uploadManual({
-                      ...manualData,
-                      header_image: res.data.image,
-                    });
-                  })
+                // uploadImage(imageFile)
+                //   .then((res) => {
+                //     setManualData({
+                //       ...manualData,
+                //       header_image: res.data.image,
+                //     });
+                //     return uploadManual({
+                //       ...manualData,
+                //       header_image: res.data.image,
+                //     });
+                //   })
+                uploadManual({
+                  ...manualData,
+                  header_image: "no image link",
+                })
                   .then((res) => {
                     setUploadSuccess(true);
                     setUploading(false);

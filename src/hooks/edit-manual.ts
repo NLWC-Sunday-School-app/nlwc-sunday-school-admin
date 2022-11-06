@@ -40,26 +40,27 @@ const useEditManual = () => {
   const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setUploadError("");
-    if (imageFile) {
-      setupLoading(true);
-      uploadImage(imageFile).then((res) => {
-        setManualData({
-          ...manualData,
-          // text: JSON.parse(manualData.text),
-          header_image: res.data.image,
-        });
-        editManual(id, { ...manualData, header_image: res.data.image })
-          .then((res) => {
-            setUploadSuccess(true);
-            setupLoading(false);
-          })
-          .catch((err) => {
-            console.log(err);
-            setUploadError("An error occured, please try again.");
-            setupLoading(false);
-          });
-      });
-    } else {
+    // if (imageFile) {
+    //   setupLoading(true);
+    //   uploadImage(imageFile).then((res) => {
+    //     setManualData({
+    //       ...manualData,
+    //       // text: JSON.parse(manualData.text),
+    //       header_image: res.data.image,
+    //     });
+    //     editManual(id, { ...manualData, header_image: res.data.image })
+    //       .then((res) => {
+    //         setUploadSuccess(true);
+    //         setupLoading(false);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //         setUploadError("An error occured, please try again.");
+    //         setupLoading(false);
+    //       });
+    //   });
+    // } 
+    // else {
       setupLoading(true);
       editManual(id, manualData)
         .then((res) => {
@@ -71,7 +72,7 @@ const useEditManual = () => {
           setUploadError("An error occured, please try again.");
           setupLoading(false);
         });
-    }
+    // }
   };
   return {
     manualData,
