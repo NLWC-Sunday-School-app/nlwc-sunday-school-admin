@@ -34,8 +34,8 @@ const DashboardHome: React.FunctionComponent<IDashboardHomeProps> = (props) => {
               {loading
                 ? "..."
                 : totalManual > 99
-                ? "0" + totalManual
-                : "00" + totalManual}
+                ? totalManual
+                : "0" + totalManual}
             </p>
             <Link to="/new" className="manual_count-btn" type="button">
               <svg
