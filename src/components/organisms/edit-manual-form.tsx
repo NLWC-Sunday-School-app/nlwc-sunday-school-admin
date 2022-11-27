@@ -330,6 +330,24 @@ const EditManualForm: React.FunctionComponent<IEditManualFormProps> = (
                   ""
                 )}
               </div>
+              <div className="manuals_visible">
+                <input
+                  type="checkbox"
+                  id="isVisible"
+                  name="isVisible"
+                  checked={manualData.is_visible === 1 ? true : false}
+                  onChange={(e) => {
+                    console.log(e.target.checked);
+                    setManualData({
+                      ...manualData,
+                      is_visible: e.target.checked ? 1 : 0,
+                    });
+                  }}
+                />
+                <label htmlFor="isVisible">
+                  Make manual visible to readers
+                </label>
+              </div>
               <button className="form_btn" type="submit" onClick={handleEdit}>
                 {uploading ? <Spinner h="20px" w="20px" /> : "Upload Manual"}
               </button>

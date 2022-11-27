@@ -16,4 +16,5 @@ export interface IManualData {
   body: string;
   summary: string;
   views: number;
+  is_visible: 1 | 0;
 }

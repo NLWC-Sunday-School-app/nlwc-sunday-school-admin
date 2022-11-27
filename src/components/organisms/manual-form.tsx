@@ -40,6 +40,7 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
     summary: "",
     memory_track: "",
     views: 0,
+    is_visible: 0,
   });
   const [imageFile, setImageFile] = useState<File>();
   const [uploading, setUploading] = useState(false);
@@ -305,6 +306,21 @@ const ManualForm: React.FunctionComponent<IManualFormProps> = (props) => {
             ) : (
               ""
             )}
+          </div>
+          <div className="manuals_visible">
+            <input
+              type="checkbox"
+              id="isVisible"
+              name="isVisible"
+              onChange={(e) => {
+                console.log(e.target.checked);
+                setManualData({
+                  ...manualData,
+                  is_visible: e.target.checked ? 1 : 0,
+                });
+              }}
+            />
+            <label htmlFor="isVisible">Make manual visible to readers</label>
           </div>
           <button
             className="form_btn"

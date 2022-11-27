@@ -48,7 +48,9 @@
     @apply flex items-center justify-center bg-[#E7F5FF] mb-10 gap-2.5 h-9 w-36 rounded;
   }
 }
-
+.manuals_visible {
+  @apply flex gap-2.5 items-center;
+}
 .ql-toolbar.ql-snow,
 .ql-editor p,
 .ql-editor ol,

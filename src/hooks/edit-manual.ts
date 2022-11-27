@@ -16,6 +16,7 @@ const useEditManual = () => {
     summary: "",
     memory_track: "",
     views: 0,
+    is_visible: 0,
   });
   const [loading, setLoading] = useState(true);
   const [uploading, setupLoading] = useState(false);
@@ -29,6 +30,8 @@ const useEditManual = () => {
     getManual(id)
       .then((res) => {
         setManualData(res.data);
+        console.log(res.data);
+
         setLoading(false);
       })
       .catch((err) => {
